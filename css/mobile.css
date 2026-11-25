@@ -1,14 +1,17 @@
-/* === SPIRIT GO: АДАПТИВНАЯ ВЁРСТКА ДЛЯ СМАРТФОНОВ И ПЛАНШЕТОВ (ПК > 960px НЕ ЗАТРОНУТ) === */
+/* === SPIRIT GO: НАДЁЖНАЯ МОБИЛЬНАЯ АДАПТАЦИЯ (ПК > 960px БЕЗ ИЗМЕНЕНИЙ) === */
 html, body {
   overscroll-behavior: none;
   -webkit-tap-highlight-color: transparent;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 #board-canvas {
   touch-action: none;
+  display: block;
 }
 
-/* Планшеты и узкие окна (до 960px) */
+/* Планшеты и смартфоны (до 960px) */
 @media (max-width: 960px) {
   body {
     user-select: none;
@@ -16,14 +19,17 @@ html, body {
   }
 
   #screen-lobby {
-    padding: 12px;
-    align-items: flex-start;
+    padding: 10px;
+    min-height: 100dvh;
+    height: auto;
     overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .lobby-card {
-    padding: 18px 14px;
-    margin: auto 0;
+    width: 100%;
+    max-width: 540px;
+    padding: 16px 12px;
   }
 
   .mode-grid-4 {
@@ -31,163 +37,166 @@ html, body {
   }
 
   #screen-game {
-    height: auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     min-height: 100dvh;
+    height: auto;
+    overflow-x: hidden;
     overflow-y: auto;
   }
 
   .game-topbar {
+    width: 100%;
     flex-wrap: wrap;
-    padding: 8px 10px;
-    gap: 8px;
+    padding: 6px 8px;
+    gap: 6px;
   }
 
-  .topbar-left, .topbar-right {
-    gap: 6px;
+  .topbar-left,
+  .topbar-right {
+    display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
   }
 
   .topbar-btn {
-    padding: 6px 9px;
-    font-size: 0.78rem;
+    padding: 5px 8px;
+    font-size: 0.75rem;
   }
 
-  /* Перестраиваем 3 колонки в удобную мобильную сетку: доска сверху, карты и журнал снизу */
+  /* Переводим .game-arena из 3-колоночного grid в вертикальный/адаптивный flex-поток */
+  #screen-game .game-arena,
   .game-arena {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      "board board"
-      "left  right";
-    gap: 10px;
-    padding: 10px;
-    overflow: visible;
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 0 auto;
+    padding: 8px !important;
+    gap: 10px !important;
+    overflow: visible !important;
   }
 
+  /* Доска — первая и на всю ширину */
+  #screen-game .board-stage,
   .board-stage {
-    grid-area: board;
-    min-height: 0;
+    order: 1;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .board-frame {
+    max-width: 100%;
     padding: 6px;
+    box-sizing: border-box;
   }
 
   .board-controls {
     width: 100%;
-    justify-content: center;
+    display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 6px;
+    margin-top: 6px;
   }
 
   .ctrl-btn {
-    padding: 8px 12px;
-    font-size: 0.82rem;
-    flex: 1 1 auto;
-    max-width: 180px;
+    padding: 7px 10px;
+    font-size: 0.78rem;
   }
 
-  .side-panel.left-panel {
-    grid-area: left;
-    max-height: 46vh;
-  }
-
-  .side-panel.right-panel {
-    grid-area: right;
-    max-height: 46vh;
-  }
-
-  /* Окно обучения поверх доски без перекрытия клеток */
-  .tutorial-box {
-    margin-top: 8px;
-  }
-
-  .tutorial-text {
-    font-size: 0.82rem;
-    min-height: 54px;
-  }
-}
-
-/* Узкие смартфоны в портретном режиме (до 600px) */
-@media (max-width: 600px) {
-  .game-arena {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "board"
-      "left"
-      "right";
-    padding: 8px;
-  }
-
+  /* Боковые панели — строго на всю ширину (100%), без узких колонок */
+  #screen-game .side-panel,
+  #screen-game .side-panel.left-panel,
+  #screen-game .side-panel.right-panel,
+  .side-panel,
   .side-panel.left-panel,
   .side-panel.right-panel {
-    max-height: none;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    flex: 0 0 auto !important;
+    max-height: none !important;
+    height: auto !important;
+    padding: 10px !important;
+    box-sizing: border-box;
+    overflow: visible !important;
+  }
+
+  #screen-game .side-panel.left-panel,
+  .side-panel.left-panel {
+    order: 2;
+  }
+
+  #screen-game .side-panel.right-panel,
+  .side-panel.right-panel {
+    order: 3;
   }
 
   .hand-list {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 6px;
-    overflow-y: visible;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    max-height: none !important;
+    overflow: visible !important;
   }
 
   .hand-card {
+    min-width: 0;
     padding: 8px;
   }
 
-  .hand-card-desc {
-    font-size: 0.72rem;
-    line-height: 1.25;
-  }
-
   .log-box {
-    min-height: 110px;
-    max-height: 150px;
+    min-height: 90px;
+    max-height: 160px;
+    overflow-y: auto;
   }
 
-  .sg-topbar-rank {
-    font-size: 0.72rem;
-    padding: 4px 7px;
+  .tutorial-box {
+    width: 100%;
+    margin-top: 8px;
+    box-sizing: border-box;
+  }
+}
+
+/* Очень узкие экраны (до 380px) */
+@media (max-width: 380px) {
+  .hand-list {
+    grid-template-columns: 1fr;
   }
 }
 
 /* Альбомная ориентация на телефоне (невысокий экран <= 520px) */
 @media (max-height: 520px) and (orientation: landscape) {
-  #screen-game {
-    height: 100dvh;
-    overflow: hidden;
-  }
-
-  .game-topbar {
-    padding: 4px 10px;
-  }
-
+  #screen-game .game-arena,
   .game-arena {
-    display: flex;
-    flex-direction: row;
-    height: calc(100dvh - 42px);
-    padding: 6px 10px;
-    gap: 8px;
-    overflow: hidden;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch;
+    padding: 6px 8px !important;
+    gap: 8px !important;
   }
 
+  #screen-game .side-panel,
   .side-panel {
-    flex: 0 0 210px;
-    max-height: 100%;
-    padding: 8px;
+    width: 210px !important;
+    max-width: 210px !important;
+    flex: 0 0 210px !important;
+    max-height: 82dvh !important;
+    overflow-y: auto !important;
   }
 
+  #screen-game .board-stage,
   .board-stage {
-    flex: 1 1 auto;
-    height: 100%;
-  }
-
-  .board-controls {
-    margin-top: 4px;
-  }
-
-  .ctrl-btn {
-    padding: 5px 10px;
-    font-size: 0.76rem;
+    flex: 1 1 auto !important;
+    width: auto !important;
   }
 }
