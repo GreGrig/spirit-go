@@ -1,0 +1,118 @@
+.cards-grid, .rules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+@keyframes tutCardPulse {
+  0%, 100% { box-shadow: 0 0 0 2px #ff6b7c, 0 0 14px rgba(255, 107, 124, 0.45); }
+  50% { box-shadow: 0 0 0 2px #ffd166, 0 0 20px rgba(255, 209, 102, 0.65); }
+}
+
+.ability-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border-muted);
+  border-radius: 4px;
+  padding: 11px 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #0d0811;
+  transition: transform 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+  position: relative;
+}
+
+.ability-card:hover:not(.disabled):not(.card-back) {
+  transform: translateY(-2px);
+  border-color: var(--crimson-soft);
+  background: var(--bg-card-hover);
+}
+
+.ability-card.selected {
+  border-color: var(--crimson);
+  background: rgba(224, 72, 92, 0.16);
+  box-shadow: 0 0 0 1px var(--crimson), inset 0 0 12px rgba(224, 72, 92, 0.2);
+}
+
+.ability-card.tutorial-highlight {
+  border-color: #ffd166;
+  animation: tutCardPulse 1.3s ease-in-out infinite;
+}
+
+.ability-card.disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.card-icon { font-size: 1.1rem; }
+.card-name { font-weight: 700; font-size: 0.9rem; color: var(--text-main); }
+
+.card-limit {
+  font-size: 0.72rem;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-muted);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.trigger-tag {
+  align-self: flex-start;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 3px;
+  letter-spacing: 0.3px;
+}
+
+.trigger-passive { background: rgba(155, 135, 210, 0.16); color: #cbbcf6; border: 1px solid rgba(155, 135, 210, 0.3); }
+.trigger-on_place { background: rgba(105, 185, 155, 0.16); color: #9de0c5; border: 1px solid rgba(105, 185, 155, 0.3); }
+.trigger-trap { background: rgba(224, 72, 92, 0.2); color: #ff8c9b; border: 1px solid rgba(224, 72, 92, 0.4); }
+.trigger-action { background: rgba(242, 166, 156, 0.16); color: #f7bdb5; border: 1px solid rgba(242, 166, 156, 0.35); }
+.trigger-endgame { background: rgba(195, 115, 165, 0.18); color: #eab2d4; border: 1px solid rgba(195, 115, 165, 0.35); }
+
+.card-desc {
+  font-size: 0.78rem;
+  line-height: 1.42;
+  color: #d8c7ce;
+}
+
+.ability-card.card-back {
+  background: repeating-linear-gradient(
+    45deg,
+    #1b1220,
+    #1b1220 8px,
+    #25172b 8px,
+    #25172b 16px
+  );
+  border-color: #4f3141;
+  cursor: default;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  text-align: center;
+}
+
+.card-back-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--rose-gold);
+}
+
+.player-hand .ability-card { padding: 9px 11px; gap: 5px; }
+.player-hand .card-desc { font-size: 0.75rem; }

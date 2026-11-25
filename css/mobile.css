@@ -1,0 +1,193 @@
+/* === SPIRIT GO: АДАПТИВНАЯ ВЁРСТКА ДЛЯ СМАРТФОНОВ И ПЛАНШЕТОВ (ПК > 960px НЕ ЗАТРОНУТ) === */
+html, body {
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#board-canvas {
+  touch-action: none;
+}
+
+/* Планшеты и узкие окна (до 960px) */
+@media (max-width: 960px) {
+  body {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  #screen-lobby {
+    padding: 12px;
+    align-items: flex-start;
+    overflow-y: auto;
+  }
+
+  .lobby-card {
+    padding: 18px 14px;
+    margin: auto 0;
+  }
+
+  .mode-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #screen-game {
+    height: auto;
+    min-height: 100dvh;
+    overflow-y: auto;
+  }
+
+  .game-topbar {
+    flex-wrap: wrap;
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .topbar-left, .topbar-right {
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .topbar-btn {
+    padding: 6px 9px;
+    font-size: 0.78rem;
+  }
+
+  /* Перестраиваем 3 колонки в удобную мобильную сетку: доска сверху, карты и журнал снизу */
+  .game-arena {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "board board"
+      "left  right";
+    gap: 10px;
+    padding: 10px;
+    overflow: visible;
+  }
+
+  .board-stage {
+    grid-area: board;
+    min-height: 0;
+  }
+
+  .board-frame {
+    padding: 6px;
+  }
+
+  .board-controls {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .ctrl-btn {
+    padding: 8px 12px;
+    font-size: 0.82rem;
+    flex: 1 1 auto;
+    max-width: 180px;
+  }
+
+  .side-panel.left-panel {
+    grid-area: left;
+    max-height: 46vh;
+  }
+
+  .side-panel.right-panel {
+    grid-area: right;
+    max-height: 46vh;
+  }
+
+  /* Окно обучения поверх доски без перекрытия клеток */
+  .tutorial-box {
+    margin-top: 8px;
+  }
+
+  .tutorial-text {
+    font-size: 0.82rem;
+    min-height: 54px;
+  }
+}
+
+/* Узкие смартфоны в портретном режиме (до 600px) */
+@media (max-width: 600px) {
+  .game-arena {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "board"
+      "left"
+      "right";
+    padding: 8px;
+  }
+
+  .side-panel.left-panel,
+  .side-panel.right-panel {
+    max-height: none;
+  }
+
+  .hand-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    overflow-y: visible;
+  }
+
+  .hand-card {
+    padding: 8px;
+  }
+
+  .hand-card-desc {
+    font-size: 0.72rem;
+    line-height: 1.25;
+  }
+
+  .log-box {
+    min-height: 110px;
+    max-height: 150px;
+  }
+
+  .sg-topbar-rank {
+    font-size: 0.72rem;
+    padding: 4px 7px;
+  }
+}
+
+/* Альбомная ориентация на телефоне (невысокий экран <= 520px) */
+@media (max-height: 520px) and (orientation: landscape) {
+  #screen-game {
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .game-topbar {
+    padding: 4px 10px;
+  }
+
+  .game-arena {
+    display: flex;
+    flex-direction: row;
+    height: calc(100dvh - 42px);
+    padding: 6px 10px;
+    gap: 8px;
+    overflow: hidden;
+  }
+
+  .side-panel {
+    flex: 0 0 210px;
+    max-height: 100%;
+    padding: 8px;
+  }
+
+  .board-stage {
+    flex: 1 1 auto;
+    height: 100%;
+  }
+
+  .board-controls {
+    margin-top: 4px;
+  }
+
+  .ctrl-btn {
+    padding: 5px 10px;
+    font-size: 0.76rem;
+  }
+}

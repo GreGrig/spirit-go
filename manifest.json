@@ -1,0 +1,26 @@
+{
+  "name": "Spirit Go — Тактическое Го с рунами",
+  "short_name": "Spirit Go",
+  "description": "Ночная геометрия Го с тактическими рунами камней, рейтингом кю/дан и сетевой игрой.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0e0912",
+  "theme_color": "#19111d",
+  "categories": ["games", "board"],
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

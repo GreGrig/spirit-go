@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spirit Go — Тактическое Го со способностями</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/cards.css" />
+  <script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.5/dist/peerjs.min.js"></script>
+  <link rel="stylesheet" href="css/rating.css">
+  <meta name="theme-color" content="#19111d">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="css/mobile.css">
+</head>
+<body>
+  <div id="app">
+    <section id="screen-lobby" class="screen active">
+      <div class="pixel-backdrop" aria-hidden="true">
+        <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" shape-rendering="crispEdges">
+          <defs>
+            <linearGradient id="crimsonNight" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#110b16" />
+              <stop offset="55%" stop-color="#221121" />
+              <stop offset="100%" stop-color="#3a1626" />
+            </linearGradient>
+          </defs>
+          <rect width="320" height="180" fill="url(#crimsonNight)" />
+          <rect x="84" y="20" width="12" height="12" fill="#ffeef2" />
+          <rect x="86" y="18" width="8" height="16" fill="#ffeef2" />
+          <rect x="82" y="22" width="16" height="8" fill="#ffeef2" />
+          <rect x="44" y="16" width="2" height="2" fill="#f497a6" />
+          <rect x="132" y="14" width="2" height="2" fill="#f497a6" />
+          <rect x="210" y="24" width="2" height="2" fill="#f497a6" />
+          <rect x="256" y="18" width="2" height="2" fill="#f497a6" />
+          <rect x="174" y="34" width="2" height="2" fill="#c95b6e" />
+          <path d="M58 92h34v-8h18v-8h26v10h42v-12h28v10h36v8h28v26H58z" fill="#c84559" opacity="0.55" />
+          <path d="M50 96h38v-8h20v-6h28v10h44v-10h26v10h38v8h28v24H50z" fill="#2a1426" />
+          <path d="M108 136v-24h4v-4h4v4h4v-4h4v4h4v10h12v-18h4v-4h4v4h4v-4h4v4h4v-4h4v4h4v16h18v-10h4v-4h4v4h4v-4h4v4h4v24z" fill="#0d0810" />
+          <rect x="116" y="118" width="3" height="3" fill="#ff5a70" />
+          <rect x="122" y="124" width="3" height="3" fill="#d94157" />
+          <rect x="150" y="108" width="3" height="3" fill="#ff5a70" />
+          <rect x="160" y="114" width="3" height="3" fill="#ff5a70" />
+          <rect x="202" y="116" width="3" height="3" fill="#ff5a70" />
+          <rect x="208" y="122" width="3" height="3" fill="#d94157" />
+          <path d="M154 100v-14h-6v-6h-6v-4h10v4h6v-6h6v4h-2v6h6v8h8v-6h12v-6h14v-4h8v6h-4v8h-6v8h-8v6h-10v6h-18z" fill="#09060c" />
+          <path d="M148 86h-12v-6h-10v-6h-8v8h4v8h6v6h8v-4h12z" fill="#09060c" />
+          <rect x="161" y="75" width="2" height="2" fill="#ff4d67" />
+          <rect x="164" y="87" width="2" height="6" fill="#ff4d67" />
+          <rect x="162" y="89" width="6" height="2" fill="#ff4d67" />
+          <path d="M0 144h54v4h34v4h56v-4h64v-4h68v-4h44v40H0z" fill="#08050b" />
+          <path d="M26 144v-16h4v-4h6v4h4v16z" fill="#08050b" />
+          <path d="M40 132h8v4h6v4h-6v4h-8z" fill="#08050b" />
+          <rect x="22" y="112" width="2" height="32" fill="#08050b" />
+          <path d="M24 114h12v2h8v3h-10v-2H24z" fill="#08050b" />
+          <rect x="64" y="140" width="2" height="8" fill="#08050b" />
+          <rect x="62" y="142" width="6" height="2" fill="#08050b" />
+          <rect x="268" y="134" width="2" height="10" fill="#08050b" />
+          <rect x="265" y="137" width="8" height="2" fill="#08050b" />
+        </svg>
+      </div>
+
+      <div class="lobby-card pixel-box">
+        <div class="logo-block">
+          <div class="logo-stones">
+            <span class="stone-icon black"></span>
+            <span class="stone-icon crest">✦</span>
+            <span class="stone-icon white"></span>
+          </div>
+          <h1 class="pixel-title">SPIRIT GO</h1>
+          <p class="subtitle">Ночная геометрия Го с тактическими рунами камней</p>
+        </div>
+
+        <div class="lobby-section">
+          <label class="section-label">Размер доски</label>
+          <div class="btn-group" id="group-board-size">
+            <button class="choice-btn size-btn active" data-size="9"><strong>9×9</strong><span>Блиц (7–10 мин)</span></button>
+            <button class="choice-btn size-btn" data-size="13"><strong>13×13</strong><span>Стандарт</span></button>
+            <button class="choice-btn size-btn" data-size="19"><strong>19×19</strong><span>Классика</span></button>
+          </div>
+        </div>
+
+        <div class="lobby-section">
+          <label class="section-label">Режим игры</label>
+          <div class="btn-group four-cols" id="group-game-mode">
+            <button class="choice-btn mode-btn active" data-mode="ai"><strong>Против ИИ</strong><span>Бот</span></button>
+            <button class="choice-btn mode-btn" data-mode="online"><strong>Онлайн 🌐</strong><span>По коду</span></button>
+            <button class="choice-btn mode-btn" data-mode="hotseat"><strong>2 Игрока</strong><span>Один ПК</span></button>
+            <button class="choice-btn mode-btn" data-mode="sandbox"><strong>Песочница</strong><span>Тест карт</span></button>
+          </div>
+        </div>
+
+        <div id="online-setup-box" class="online-box hidden">
+          <div class="online-split">
+            <div class="online-col">
+              <h4>Создать комнату (Чёрные)</h4>
+              <div id="host-code-display" class="room-code-display">----</div>
+              <button id="btn-create-room" class="primary-btn">Получить код</button>
+            </div>
+            <div class="online-col">
+              <h4>Войти к другу (Белые)</h4>
+              <input type="text" id="input-join-code" class="room-input" maxlength="4" placeholder="КОД" />
+              <button id="btn-join-room" class="secondary-btn">Подключиться</button>
+            </div>
+          </div>
+          <div id="online-status-text" class="online-status">Создайте комнату или введите 4-значный код друга</div>
+        </div>
+
+        <div class="lobby-section inline-row">
+          <label class="section-label" for="input-komi">Коми (компенсация Белым):</label>
+          <input type="number" id="input-komi" step="0.5" min="0" max="50" value="6.5" />
+        </div>
+
+        <div class="lobby-actions-row">
+          <button id="btn-start-match" class="primary-btn large">Начать партию</button>
+          <button id="btn-start-tutorial" class="secondary-btn tutorial-launch-btn">🎓 Обучение с дракончиком</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="screen-voting" class="screen">
+      <div class="voting-card pixel-box">
+        <div class="timer-ring"><span id="voting-timer">10</span></div>
+        <h2 class="pixel-subtitle">Формат карт</h2>
+        <p class="muted-text">
+          Если голоса совпадут — включится выбранный режим. Если мнения разойдутся — включится
+          <strong>Режим Рандом</strong> с общим набором из 5 случайных карт.
+        </p>
+
+        <div class="vote-options">
+          <button id="vote-open-btn" class="vote-option-btn">
+            <div class="vote-icon">👁️</div>
+            <h3>Открытый выбор</h3>
+            <p>Колоды обоих игроков видны с самого начала. Максимум расчёта и контр-игры.</p>
+          </button>
+
+          <button id="vote-closed-btn" class="vote-option-btn">
+            <div class="vote-icon">🎭</div>
+            <h3>Закрытый выбор</h3>
+            <p>Карты соперника скрыты до момента выставления. Простор для блефа и ловушек.</p>
+          </button>
+        </div>
+
+        <div id="voting-status-text" class="status-banner">Сделайте ваш выбор...</div>
+        <div id="voting-result-banner" class="result-banner hidden"></div>
+      </div>
+    </section>
+
+    <section id="screen-draft" class="screen">
+      <div class="draft-container">
+        <header class="draft-header pixel-box">
+          <div>
+            <h2 id="draft-header-title">Сборка руки: Чёрные (0 / 5)</h2>
+            <p class="muted-text">Выберите 5 карт способностей в руку. Лимит копий указан на каждой карте.</p>
+          </div>
+          <div class="draft-meta">
+            <span id="draft-mode-badge" class="badge">Открытый режим</span>
+            <button id="btn-random-fill" class="secondary-btn">Случайный набор</button>
+            <button id="btn-confirm-draft" class="primary-btn" disabled>Подтвердить руку</button>
+          </div>
+        </header>
+
+        <div class="draft-selected-bar pixel-box">
+          <span class="bar-label">Ваша рука:</span>
+          <div id="draft-selected-list" class="selected-slots"></div>
+        </div>
+
+        <div id="draft-opponent-preview" class="draft-opponent-bar pixel-box hidden">
+          <span class="bar-label">Выбор соперника (Открытый режим):</span>
+          <div id="draft-opponent-list" class="mini-card-list"></div>
+        </div>
+
+        <div id="draft-pool" class="cards-grid"></div>
+      </div>
+    </section>
+
+    <section id="screen-game" class="screen">
+      <header class="game-topbar">
+        <div class="topbar-left">
+          <span class="brand-mini">SPIRIT GO</span>
+          <span id="game-mode-label" class="badge">9×9 • Открытый</span>
+          <span id="online-role-badge" class="badge hidden">Вы: Чёрные</span>
+        </div>
+
+        <div class="topbar-center">
+          <div id="turn-indicator" class="turn-pill black-turn">
+            <span class="dot"></span>
+            <span id="turn-text">Ход Чёрных</span>
+          </div>
+          <span id="extra-turn-badge" class="extra-badge hidden">Двойной ход!</span>
+        </div>
+
+        <div class="topbar-right">
+          <button id="btn-rules" class="icon-btn" title="Справочник карт">📖 Карты</button>
+          <button id="btn-sound" class="icon-btn" title="Звук">🔊</button>
+          <button id="btn-surrender" class="icon-btn danger">Сдаться</button>
+          <button id="btn-to-menu" class="icon-btn">Меню</button>
+        </div>
+      </header>
+
+      <main class="arena-layout">
+        <aside id="panel-black" class="player-panel pixel-box">
+          <div class="player-header">
+            <div class="player-title"><span class="stone-icon black small"></span><h3>Чёрные</h3></div>
+            <div class="captures-box">Пленные: <strong id="black-captures">0</strong></div>
+          </div>
+          <div class="hand-label">Карты способностей</div>
+          <div id="hand-black" class="player-hand"></div>
+
+          <div id="tutorial-assistant" class="tutorial-dock hidden">
+            <div class="tutorial-top-bar">
+              <span id="tutorial-lesson-badge" class="tutorial-badge">Урок 1 / 6</span>
+              <div class="tutorial-nav-mini">
+                <button id="btn-tut-prev" class="mini-tut-btn" title="Предыдущий урок">◀</button>
+                <button id="btn-tut-next-lesson" class="mini-tut-btn" title="Следующий урок">▶</button>
+              </div>
+            </div>
+
+            <div class="dragon-stage">
+              <div id="dragon-sprite" class="dragon-avatar" aria-hidden="true">
+                <svg viewBox="0 0 18 18" shape-rendering="crispEdges">
+                  <!-- Крылышки -->
+                  <rect class="dragon-wing" x="1" y="7" width="3" height="2" fill="#4b2c46" />
+                  <rect class="dragon-wing" x="2" y="6" width="2" height="1" fill="#e0485c" />
+                  <rect class="dragon-wing" x="14" y="7" width="3" height="2" fill="#4b2c46" />
+                  <rect class="dragon-wing" x="14" y="6" width="2" height="1" fill="#e0485c" />
+                  <!-- Рожки -->
+                  <rect x="5" y="1" width="1" height="2" fill="#ff6b7c" />
+                  <rect x="6" y="2" width="1" height="2" fill="#e0485c" />
+                  <rect x="12" y="1" width="1" height="2" fill="#ff6b7c" />
+                  <rect x="11" y="2" width="1" height="2" fill="#e0485c" />
+                  <!-- Голова -->
+                  <rect x="5" y="4" width="8" height="5" fill="#1e1526" />
+                  <rect x="4" y="5" width="10" height="3" fill="#2a1d35" />
+                  <!-- Глазки -->
+                  <rect x="6" y="6" width="2" height="2" fill="#ff5a70" />
+                  <rect x="6" y="6" width="1" height="1" fill="#fff0f3" />
+                  <rect x="10" y="6" width="2" height="2" fill="#ff5a70" />
+                  <rect x="10" y="6" width="1" height="1" fill="#fff0f3" />
+                  <!-- Тельце -->
+                  <rect x="5" y="9" width="8" height="6" fill="#181020" />
+                  <rect x="6" y="10" width="6" height="5" fill="#2a1c36" />
+                  <!-- Алая руна на груди -->
+                  <rect x="8" y="11" width="2" height="3" fill="#ff5a70" />
+                  <rect x="7" y="12" width="4" height="1" fill="#ff5a70" />
+                  <!-- Лапки и хвостик -->
+                  <rect x="5" y="15" width="2" height="2" fill="#3a2747" />
+                  <rect x="11" y="15" width="2" height="2" fill="#3a2747" />
+                  <rect x="13" y="13" width="2" height="2" fill="#1e1526" />
+                  <rect x="15" y="12" width="2" height="1" fill="#e0485c" />
+                </svg>
+              </div>
+              <div class="dragon-meta">
+                <div class="dragon-name">Игнис • Наставник</div>
+                <div id="tutorial-lesson-title" class="dragon-topic">Основы и Монолит</div>
+              </div>
+            </div>
+
+            <div class="speech-bubble">
+              <p id="tutorial-speech-text">Привет! Я научу тебя управлять рунами камней.</p>
+            </div>
+
+            <div class="tutorial-actions">
+              <button id="btn-tut-action" class="primary-btn">Понятно, далее ➔</button>
+              <button id="btn-tut-exit" class="secondary-btn">Выйти</button>
+            </div>
+          </div>
+        </aside>
+
+        <section class="board-stage">
+          <div id="targeting-hint" class="targeting-banner hidden"></div>
+          <div id="board-wrapper" class="board-wrapper pixel-box">
+            <canvas id="go-board"></canvas>
+          </div>
+          <div class="board-controls">
+            <button id="btn-normal-stone" class="control-btn active">Обычный камень</button>
+            <button id="btn-cancel-card" class="control-btn warning hidden">Отменить карту</button>
+            <button id="btn-pass" class="control-btn">Пас</button>
+            <button id="btn-undo" class="control-btn hidden">Отменить ход</button>
+          </div>
+        </section>
+
+        <aside id="panel-white" class="player-panel pixel-box">
+          <div class="player-header">
+            <div class="player-title"><span class="stone-icon white small"></span><h3>Белые</h3></div>
+            <div class="captures-box">Пленные: <strong id="white-captures">0</strong></div>
+          </div>
+          <div class="hand-label">Карты способностей</div>
+          <div id="hand-white" class="player-hand"></div>
+
+          <div class="log-section">
+            <div class="hand-label">Журнал партии</div>
+            <div id="move-log" class="move-log"></div>
+          </div>
+        </aside>
+      </main>
+    </section>
+
+    <div id="hotseat-curtain" class="overlay hidden">
+      <div class="modal-box pixel-box">
+        <div class="curtain-icon">🛡️</div>
+        <h2 id="curtain-title">Передайте управление сопернику</h2>
+        <p id="curtain-subtitle">Нажмите кнопку ниже, когда будете готовы открыть свои карты.</p>
+        <button id="btn-curtain-ready" class="primary-btn large" style="margin-top:16px;">Я готов</button>
+      </div>
+    </div>
+
+    <div id="modal-scoring" class="overlay hidden">
+      <div class="modal-box wide pixel-box">
+        <h2 id="scoring-winner">Победа Чёрных!</h2>
+        <div id="scoring-breakdown"></div>
+        <div class="modal-actions">
+          <button id="btn-rematch" class="primary-btn">Реванш</button>
+          <button id="btn-scoring-menu" class="secondary-btn">В главное меню</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal-rules" class="overlay hidden">
+      <div class="modal-box extra-wide pixel-box">
+        <div class="modal-header-row">
+          <h2>Справочник всех 18 карт способностей</h2>
+          <button id="btn-close-rules" class="icon-btn">✕</button>
+        </div>
+        <div id="rules-catalog-list" class="rules-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/catalog.js"></script>
+  <script src="js/network.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/rules.js"></script>
+  <script src="js/abilities.js"></script>
+  <script src="js/pipeline.js"></script>
+  <script src="js/sound.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/tutorial.js"></script>
+  <script src="js/bot.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/rating.js"></script>
+  <script>
+    if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
